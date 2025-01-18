@@ -1,6 +1,225 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+/*****************************************
+ * Layout
+******************************************/
+body {
+  margin: 0;
+}
+
+/*****************************************
+ * Header
+******************************************/
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.siteName a, #tools a {
+  text-decoration: none;
+  color: black;
+}
+
+.siteName a {
+  font-size: 100px;
+  padding-left: 5px;
+}
+
+#tools a {
+  font-size: 35px;
+  padding-right: 10px;
+}
+
+.siteName a:visited, #tools a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+/*****************************************
+ * Navigation 
+******************************************/
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  background-color: #242333;
+  width: 100%;
+  height: auto;
+  padding: 25px 0;
+}
+
+nav li {
+  color: white;
+  list-style-type: none;
+  font-size: 40px;
+}
+
+/*****************************************
+ * Index
+******************************************/
+.welcome {
+  font-size: 4vw;
+  padding-left: 5px;
+  padding-top: 40px;
+}
+
+h2 {
+  padding-top: 40px;
+  padding-left: 10px;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  margin-top: 40px;
+}
+
+.hero_img {
+  width: 100%;
+  height: auto;
+}
+
+.hero_action {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero_action h2 {
+  font-size: 50px;
+  margin: 0;
+  opacity: 100%;
+  color: #06b0d3;
+  font-weight: 800;
+  padding-top: 0;
+}
+
+.hero_action ul {
+  padding: 0;
+}
+
+.hero_action li {
+  font-size: 40px;
+  list-style-type: none;
+  color: #06b0d3;
+  font-weight: bold;
+}
+
+.hero_action button {
+  font-size: 40px;
+  padding: 20px;
+  color: black;
+  background-color: #06b0d3;;
+}
+
+/* Reviews Section */
+.reviews {
+  padding-left: 10px;
+}
+
+.reviews h2 {
+  font-size: 3.5vw;
+}
+
+.reviews li {
+  font-size: 1.4vw;
+  padding: 10px 0;
+}
+
+/* Upgrades Section */
+.upgrades_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px 30px;
+  grid-template-rows: 300px 300px;
+  padding: 20px;
+}
+
+.image_frame {
+  display: flex;
+  width: 100%;
+  height: 90%;
+  background-color: #06b0d3;
+  justify-content: center;
+  border: 2px black solid;
+}
+
+.image_frame img {
+  width: 40%;
+  height: auto;
+  object-fit: contain;
+}
+
+.capacitor {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+
+.decals {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.stickers {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.hubcaps {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.upgrades_container a {
+  font-size: 45px;
+  text-align: center;
+}
+
+.capacitor, .decals, .stickers, .hubcaps {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+/*****************************************
+ * Footer
+******************************************/
+footer {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-top: 50px;
+}
+
+
+/*****************************************
+ * Larger Screen
+******************************************/
+@media (min-width: 600px) {
+  /*****************************************
+  * Layout
+  ******************************************/
+  body {
+    margin: 10px 75px;
+  }
+
+  /*****************************************
+  * Header
+  ******************************************/
+  .siteName {
+    padding-top: 25px;
+  }
+
+  .siteName a {
+    font-size: 50px;
+  }
+
+  #tools {
+    padding-top: 30px;
+  }
+
+  #tools a {
+    font-size: 20px;
+  }
+
 }
