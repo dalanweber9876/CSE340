@@ -243,6 +243,15 @@ main h1 {
   color: black;
 }
 
+/*****************************************
+ * Errors
+******************************************/
+
+/* Error */
+#message404 {
+  display:flex;
+  justify-self: center;
+}
 
 /*****************************************
  * Larger Screen
@@ -386,6 +395,20 @@ main h1 {
     flex-wrap: wrap;
     grid-column: 1/5;
     justify-content: space-evenly;
+  }
+
+
+  /*****************************************
+  * Errors
+  ******************************************/
+
+  /* Error */
+  #title404 {
+    grid-column: 2/4;
+  }
+
+  #message404 {
+    grid-column: 2/4;
   }
 
 
