@@ -34,7 +34,6 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 
 // Error link route
-// app.use("/produce-error", utilities.handleErrors(errorController))
 app.use("/produce-error", utilities.handleErrors(errorController.produceError))
 
 // File Not Found Route - must be last route in list
