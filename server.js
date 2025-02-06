@@ -13,6 +13,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities")
+const errorController = require("./controllers/errorController");
 
 /* ***********************
  * View Engine and Templates
@@ -31,6 +32,10 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Error link route
+// app.use("/produce-error", utilities.handleErrors(errorController))
+app.use("/produce-error", utilities.handleErrors(errorController.produceError))
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

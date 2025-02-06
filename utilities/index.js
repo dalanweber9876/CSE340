@@ -67,7 +67,7 @@ Util.buildProductDetails = async function(data){
     details += '<h1>' + data[0].inv_year + ' ' + data[0].inv_make + ' ' + data[0].inv_model + '</h1>'
     details +=  '<img src="' + data[0].inv_image 
       +'" alt="Image of '+ data[0].inv_make + ' ' + data[0].inv_model 
-      +' on CSE Motors" />'
+      +' on CSE Motors" >'
     details += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + ' Details</h2>'
 
     details += '<div class="info">'

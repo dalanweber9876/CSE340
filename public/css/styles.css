@@ -286,6 +286,7 @@ main h1 {
 #message404 {
   display:flex;
   justify-self: center;
+  padding: 10px;
 }
 
 
