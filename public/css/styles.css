@@ -5,6 +5,7 @@ body {
   margin: 0;
 }
 
+
 /*****************************************
  * Header
 ******************************************/
@@ -34,6 +35,7 @@ body {
   color: black;
 }
 
+
 /*****************************************
  * Navigation 
 ******************************************/
@@ -55,6 +57,7 @@ nav ul li a, nav ul li a:visited {
   color: white;
   text-decoration: none;
 }
+
 
 /*****************************************
  * Index
@@ -202,10 +205,8 @@ footer {
 
 
 /*****************************************
- * Inventory
+ * Classification
 ******************************************/
-
-/* Classification */
 main h1 {
   display: flex;
   justify-self: center;
@@ -243,20 +244,55 @@ main h1 {
   color: black;
 }
 
+
+/*****************************************
+ * Details
+******************************************/
+.details img {
+  display: flex;
+  max-width: 90%;
+  justify-self: center;
+}
+
+.details h2 {
+  display: flex;
+  justify-self: center;
+}
+
+.price, .description, .color, .miles {
+  margin: 0 4%;
+}
+
+.details h3{
+  margin-bottom: 0;
+}
+
+.details p {
+  margin-top: 0;
+}
+
+.info {
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 90%;
+  margin: auto;
+}
+
+
 /*****************************************
  * Errors
 ******************************************/
-
-/* Error */
 #message404 {
   display:flex;
   justify-self: center;
 }
 
+
 /*****************************************
  * Larger Screen
 ******************************************/
-@media (min-width: 700px) {
+@media (min-width: 760px) {
   /*****************************************
   * Layout
   ******************************************/
@@ -279,6 +315,7 @@ main h1 {
     gap: 0 10px;
   }
 
+
   /*****************************************
   * Header
   ******************************************/
@@ -297,6 +334,7 @@ main h1 {
   #tools a {
     font-size: 20px;
   }
+
 
   /*****************************************
   * Index
@@ -369,6 +407,7 @@ main h1 {
     font-size: 15px;
   }
 
+
   /*****************************************
   * Footer
   ******************************************/
@@ -382,10 +421,8 @@ main h1 {
   
 
   /*****************************************
-  * Inventory
+  * Classification
   ******************************************/
-
-  /* Classification */
   main h1 {
     grid-column: 2/4;
   }
@@ -399,10 +436,36 @@ main h1 {
 
 
   /*****************************************
+  * Details
+  ******************************************/
+  .details {
+    grid-column: 1/5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .details h1 {
+    grid-column: 1/3;
+  }
+
+  .details img {
+    grid-column: 1/2;
+    grid-row: 2/4;
+    margin: auto;
+  }
+
+  .details h2 {
+    grid-row: 2/3;
+  }
+
+  .details h2, .details .info {
+    grid-column: 2/3;
+  }
+
+
+  /*****************************************
   * Errors
   ******************************************/
-
-  /* Error */
   #title404 {
     grid-column: 2/4;
   }

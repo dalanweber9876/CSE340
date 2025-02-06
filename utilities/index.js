@@ -57,6 +57,46 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the product display view HTML
+* ************************************ */
+Util.buildProductDetails = async function(data){
+  let details
+  if (data.length > 0) {
+    details  = '<div class="details">'
+    details += '<h1>' + data[0].inv_year + ' ' + data[0].inv_make + ' ' + data[0].inv_model + '</h1>'
+    details +=  '<img src="' + data[0].inv_image 
+      +'" alt="Image of '+ data[0].inv_make + ' ' + data[0].inv_model 
+      +' on CSE Motors" />'
+    details += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + ' Details</h2>'
+
+    details += '<div class="info">'
+    details += '<div class="price">'
+    details += '<h3>Price: </h3>'
+    details += '<p>$' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</p>'
+    details += '</div>'
+
+    details += '<div class="description">'
+    details += '<h3>Description: </h3>'
+    details += '<p>' + data[0].inv_description + '</p>'
+    details += '</div>'
+
+    details += '<div class="color">'
+    details += '<h3>Color: </h3>'
+    details += '<p>' + data[0].inv_color + '</p>'
+    details += '</div>'
+
+    details += '<div class="miles">'
+    details += '<h3>Miles: </h3>'
+    details += '<p>' + new Intl.NumberFormat('en-US').format(data[0].inv_miles) + '</p>'
+    details += '</div>'
+
+    details += '</div>'
+    details += '</div>'
+  }
+  return details
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
