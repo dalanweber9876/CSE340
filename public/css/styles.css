@@ -291,6 +291,60 @@ main h1 {
 
 
 /*****************************************
+ * Login/Register
+******************************************/
+.loginContainer {
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #32475c;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.loginForm button {
+  margin: auto;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  font-size: 15px;
+}
+
+.loginForm input {
+  margin-bottom: 15px;
+  height: 20px;
+}
+
+.loginForm label {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.loginContainer p a, .loginContainer p a:visited {
+  color: white;
+}
+
+
+/*****************************************
+ * Add Inventory
+******************************************/
+.inventory-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inventory-form label {
+  padding-top: 10px;
+}
+
+/*****************************************
  * Larger Screen
 ******************************************/
 @media (min-width: 760px) {
@@ -342,7 +396,7 @@ main h1 {
   ******************************************/
   .welcome {
     font-size: 35px;
-    grid-column: 1/5;
+    grid-column: 2/4;
   }
 
   /* Hero */
@@ -475,5 +529,32 @@ main h1 {
     grid-column: 2/4;
   }
 
+  /*****************************************
+  * Login/Register
+  ******************************************/
+  .loginContainer {
+    grid-column: 2/4;
+    max-width: none;
+    width: 85%;
+  }
+
+  .loginForm button{
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .loginContainer p {
+    font-size: 20px;
+  }
+
+  .loginForm ul {
+    margin: 0px;
+    padding: 0px 0px 20px 20px;
+  }
+
+  .loginForm ul span {
+    margin-left: -15px;
+  }
 
 }
