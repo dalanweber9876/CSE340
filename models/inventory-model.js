@@ -54,7 +54,7 @@ async function addClassification(classification_name){
 }
 
 /* *****************************
-*   Add new classification
+*   Add new inventory
 * *************************** */
 async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, 
   inv_thumbnail, inv_price, inv_miles, inv_color, classification_id){
