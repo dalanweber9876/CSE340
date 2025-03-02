@@ -333,16 +333,57 @@ main h1 {
 
 
 /*****************************************
- * Add Inventory
+ * Inventory Management
 ******************************************/
-.inventory-form {
+.management-links {
   display: flex;
   flex-direction: column;
 }
 
-.inventory-form label {
-  padding-top: 10px;
+#classification-link, #inventory-link {
+  text-decoration: none;
+  margin: auto;
+  padding: 5px;
 }
+
+#classification-link:visited, #inventory-link:visited {
+  color: black;
+}
+
+/*****************************************
+ * Add Classification/Inventory
+******************************************/
+.management-forms {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #06b0d3;
+  margin: 15px;
+}
+
+.management-forms label {
+  font-size: 20px;
+  padding-bottom: 5px;
+  margin-top: 15px;
+}
+
+.management-forms input {
+  height: 25px;
+  max-width: 300px;
+}
+
+.management-forms button {
+  margin: auto;
+  width: 150px;
+  font-size: 16px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.management-forms textarea {
+  max-width: 300px;
+}
+
 
 /*****************************************
  * Larger Screen
@@ -555,6 +596,37 @@ main h1 {
 
   .loginForm ul span {
     margin-left: -15px;
+  }
+
+
+  /*****************************************
+  * Inventory Management
+  ******************************************/
+  .management-header {
+    grid-column: 1/5;
+    font-size: 40px;
+  }
+
+  .management-links {
+    grid-column: 1/5;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  #classification-link, #inventory-link {
+    font-size: 25px;
+  }
+
+
+  /*****************************************
+  * Add Classification/Inventory
+  ******************************************/
+  .management-forms {
+    grid-column: 2/4;
+  }
+
+  .management-forms input, .management-forms textarea {
+    max-width: 500px;
   }
 
 }

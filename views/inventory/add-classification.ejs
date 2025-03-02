@@ -10,12 +10,12 @@
       </ul>
     <% } %>
   
-    <form action="/inv/add-classification" method="post">
-      <label for="classification_name">Classification Name</label>
+    <form class="management-forms" action="/inv/add-classification" method="post">
+      <label for="classification_name">Classification Name:</label>
       <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z0-9]+$">
-      <p>The new classification name may not include spaces or special characters!</p>
+      <p>**The new classification name may not include spaces or special characters!**</p>
   
-      <button type="submit">Create Classification</button>
+      <button type="submit">Add Classification</button>
     </form>
   
   <% } else { %>

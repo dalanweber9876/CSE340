@@ -1,5 +1,5 @@
 <% if (title) { %>
-    <h1><%= title %></h1>
+    <h1 class="management-header"><%= title %></h1>
     <p><%- messages() %></p>
     
     <% if (errors) { %>
@@ -10,8 +10,10 @@
        </ul>
       <% } %>
 
-    <a href="/inv/add-classification">Add New Classification</a>
-    <a href="/inv/add-inventory">Add New Inventory</a>
+    <div class="management-links">
+      <a id="classification-link" href="/inv/add-classification">Add New Classification</a>
+      <a id="inventory-link" href="/inv/add-inventory">Add New Inventory</a>
+    </div>
 
     <% } else {
       res.redirect('/')
