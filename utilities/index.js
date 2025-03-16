@@ -164,5 +164,17 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+  /* ****************************************
+ *  Check Account Type
+ * ************************************ */
+  Util.checkAccountType = (req, res, next) => {
+    let accountType = res.locals.accountData.account_type;
+    if (accountType == 'Employee' || accountType == 'Admin') {
+      next()
+    } else {
+      req.flash("notice", "You must be an employee or admin to access that page.")
+      return res.redirect("/account/login")
+    }
+   }
 
 module.exports = Util

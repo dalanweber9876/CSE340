@@ -11,16 +11,18 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 // Route to build product details view
 router.get("/detail/:invId", utilities.handleErrors(invController.buildDetailsByInvId));
 
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.checkAccountType, utilities.handleErrors(invController.buildManagement));
 
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+router.get("/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildAddClassification));
 router.post("/add-classification", 
+    utilities.checkAccountType, 
     validateManagement.classificationRules(), 
     validateManagement.checkClassificationName,
     utilities.handleErrors(invController.addClassification));
 
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+router.get("/add-inventory", utilities.checkAccountType, utilities.handleErrors(invController.buildAddInventory));
 router.post("/add-inventory", 
+    utilities.checkAccountType,
     validateManagement.inventoryRules(), 
     validateManagement.checkInventory,
     utilities.handleErrors(invController.addInventory));
@@ -28,11 +30,11 @@ router.post("/add-inventory",
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // Routes to edit inventory
-router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildEditInventory))
-router.post("/update/", validateManagement.inventoryRules(), validateManagement.checkUpdateData, utilities.handleErrors(invController.updateInventory))
+router.get("/edit/:inventory_id", utilities.checkAccountType, utilities.handleErrors(invController.buildEditInventory))
+router.post("/update/", utilities.checkAccountType, validateManagement.inventoryRules(), validateManagement.checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
 // Routes to delete inventory
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmation))
-router.post("/delete/", utilities.handleErrors(invController.deleteInventory))
+router.get("/delete/:inv_id", utilities.checkAccountType, utilities.handleErrors(invController.buildDeleteConfirmation))
+router.post("/delete/", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;

@@ -9,7 +9,16 @@
        </ul>
       <% } %>
 
-    <h2>You're logged in!</h2>
+    <h2>Welcome <%- locals.accountData.account_firstname %>!</h2>
+    <p>You're logged in!</p>
+
+    <% if(locals.accountData.account_type == 'Client') { %>
+      <p><a href="/account/edit/:clientId">Edit Account Information</a></p>
+    <% } else { %>
+      
+      <h3>Inventory Management</h3>
+      <p><a href="/inv">Manage Inventory</a></p>
+      <% } %>
 
     <% } else {
       res.redirect('/')
