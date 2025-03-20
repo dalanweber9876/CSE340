@@ -27,12 +27,25 @@ router.post(
 )
 
 // Edit Account
-router.get("/edit/:client_id", utilities.handleErrors(accountController.buildEditAccount));
+router.get("/edit/:client_id", utilities.checkLogin, utilities.handleErrors(accountController.buildEditAccount));
 router.post(
     "/edit-account/:client_id",
+    utilities.checkLogin,
     regValidate.editAccountRules(), 
     regValidate.checkEditData,
     utilities.handleErrors(accountController.updateAccount)
 )
+
+// Change Password
+router.post(
+    "/change-password/:client_id",
+    utilities.checkLogin,
+    regValidate.changePasswordRules(), 
+    regValidate.checkNewPassword,
+    utilities.handleErrors(accountController.changePassword)
+)
+
+// Logout
+router.get("/logout", utilities.checkLogin, utilities.handleErrors(accountController.logout));
 
 module.exports = router;

@@ -191,5 +191,68 @@ async function updateAccount(req, res) {
     })
   }
 }
+
+/* ****************************************
+*  Change Password
+* *************************************** */
+async function changePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_password, account_id } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("account/register", {
+      title: "Registration",
+      nav,
+      errors: null,
+    })
+  }
+
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccount, updateAccount }
+  if (updateResult) {
+    res.locals.accountData = {
+      ...res.locals.accountData,
+      account_password: updateResult.account_password,
+    };
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve changed your password, ${res.locals.accountData.account_firstname}!`
+    )
+    res.status(201).render("account/accountManagement", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the password change failed.")
+    res.status(501).render("account/edit", {
+      title: "Edit Account",
+      nav,
+      account_firstname: res.locals.accountData.account_firstname,
+      account_lastname: res.locals.accountData.account_lastname,
+      account_email: res.locals.accountData.account_email,
+      account_password: updateResult.account_password,
+      account_id: updateResult.account_id,
+    })
+  }
+}
+
+/* ****************************************
+*  Logout
+* *************************************** */
+async function logout(req, res, next) {
+  let nav = await utilities.getNav()
+  res.clearCookie("jwt");
+  return res.redirect("/")
+}
+  
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccount, updateAccount, changePassword, logout }

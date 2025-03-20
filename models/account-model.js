@@ -52,4 +52,17 @@ async function updateAccount(account_firstname, account_lastname, account_email,
   }
 }
 
-module.exports  = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount }
+/* *****************************
+*   Update a password
+* *************************** */
+async function updatePassword(account_password, account_id){
+  try {
+    const sql = "UPDATE account SET account_password = $1 WHERE account_id = $2 RETURNING *";
+    const result = await pool.query(sql, [account_password, account_id])
+    return result.rows[0];
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports  = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, updatePassword }
