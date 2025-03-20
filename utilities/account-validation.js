@@ -155,10 +155,13 @@ validate.editAccountRules = () => {
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
+      .custom(async (account_email, { req }) => {
         const emailExists = await accountModel.checkExistingEmail(account_email)
         if (emailExists){
+          const account = await accountModel.getAccountByEmail(account_email)
+          if (account.account_id != req.body.account_id) {
             throw new Error("Email exists. Please log in or use different email")
+          } 
         }
     }),
   ]
