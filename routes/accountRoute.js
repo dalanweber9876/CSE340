@@ -26,4 +26,13 @@ router.post(
     utilities.handleErrors(accountController.accountLogin)
 )
 
+// Edit Account
+router.get("/edit/:client_id", utilities.handleErrors(accountController.buildEditAccount));
+router.post(
+    "/edit-account/:client_id",
+    regValidate.editAccountRules(), 
+    regValidate.checkEditData,
+    utilities.handleErrors(accountController.updateAccount)
+)
+
 module.exports = router;

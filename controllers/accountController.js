@@ -129,5 +129,67 @@ async function buildAccountManagement(req, res, next) {
     errors: null,
   })
 }
+
+/* ****************************************
+*  Deliver edit account view
+* *************************************** */
+async function buildEditAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  // const { account_firstname, account_lastname, account_email, account_id } = res.locals.accountData;
+  const accountInfo = await accountModel.getAccountByEmail(res.locals.accountData.account_email)
+
+  res.render("account/updateAccount", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_firstname: accountInfo.account_firstname,
+    account_lastname: accountInfo.account_lastname,
+    account_email: accountInfo.account_email,
+    account_id: accountInfo.account_id,
+  })
+}
+
+/* ****************************************
+*  Update Account
+* *************************************** */
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (updateResult) {
+    res.locals.accountData = {
+      ...res.locals.accountData,
+      account_firstname: updateResult.account_firstname,
+      account_lastname: updateResult.account_lastname,
+      account_email: updateResult.account_email,
+    };
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve updated your account, ${account_firstname}!`
+    )
+    res.status(201).render("account/accountManagement", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/edit", {
+      title: "Edit Account",
+      nav,
+      account_firstname: updateResult.account_firstname,
+      account_lastname: updateResult.account_lastname,
+      account_email: updateResult.account_email,
+      account_id: updateResult.account_id,
+    })
+  }
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccount, updateAccount }
