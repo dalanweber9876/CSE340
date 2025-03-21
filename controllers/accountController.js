@@ -205,9 +205,9 @@ async function changePassword(req, res) {
     // regular password and cost (salt is generated automatically)
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
-    req.flash("notice", 'Sorry, there was an error processing the registration.')
-    res.status(500).render("account/register", {
-      title: "Registration",
+    req.flash("notice", 'Sorry, there was an error processing the password change.')
+    res.status(500).render("account/edit", {
+      title: "Change Password",
       nav,
       errors: null,
     })

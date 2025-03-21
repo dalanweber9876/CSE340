@@ -41,16 +41,21 @@ body {
 ******************************************/
 nav ul {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: center;
   background-color: #242333;
   width: 100%;
   height: auto;
   padding: 15px 0;
+  flex-direction: column;
 }
 
 nav li {
   font-size: 20px;
   list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 
 nav ul li a, nav ul li a:visited {
@@ -385,6 +390,39 @@ main h1, main h2 {
   max-width: 300px;
 }
 
+/*****************************************
+ * Manage Account
+******************************************/
+.management-body {
+  padding-left: 20px;
+}
+
+.management-body p:first-child {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.management-body p a {
+  text-decoration: none;
+  color: black;
+  font-style: italic;
+}
+
+.management-body p a:visited {
+  color: black;
+}
+
+.loginForm .submit-button {
+  font-size: 13px;
+  height: 35px;
+  width: 120px;
+}
+
+#messages {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
 
 /*****************************************
  * Larger Screen
@@ -430,6 +468,19 @@ main h1, main h2 {
 
   #tools a {
     font-size: 20px;
+  }
+
+  /*****************************************
+  * Navigation 
+  ******************************************/
+  nav ul {
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  nav li {
+    padding: 0px;
   }
 
 
@@ -628,6 +679,22 @@ main h1, main h2 {
 
   .management-forms input, .management-forms textarea {
     max-width: 500px;
+  }
+
+  /*****************************************
+  * Account Management
+  ******************************************/
+  .management-title {
+    text-align: center;
+  }
+
+  .management-body {
+    grid-column: 2/4;
+    justify-self: center;
+  }
+
+  .management-body a {
+    font-size: 18px;
   }
 
 }
