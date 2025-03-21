@@ -136,7 +136,8 @@ async function buildAccountManagement(req, res, next) {
 async function buildEditAccount(req, res, next) {
   let nav = await utilities.getNav()
   // const { account_firstname, account_lastname, account_email, account_id } = res.locals.accountData;
-  const accountInfo = await accountModel.getAccountByEmail(res.locals.accountData.account_email)
+  // const accountInfo = await accountModel.getAccountByEmail(res.locals.accountData.account_email)
+  const accountInfo = await accountModel.getAccountById(res.locals.accountData.account_id)
 
   res.render("account/updateAccount", {
     title: "Edit Account",
@@ -146,6 +147,7 @@ async function buildEditAccount(req, res, next) {
     account_lastname: accountInfo.account_lastname,
     account_email: accountInfo.account_email,
     account_id: accountInfo.account_id,
+    // account_id: res.locals.accountData.account_id
   })
 }
 
