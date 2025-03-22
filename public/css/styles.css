@@ -669,6 +669,10 @@ main h1, main h2 {
     font-size: 25px;
   }
 
+  .manageInventory {
+    grid-column: 2/4;
+  }
+
 
   /*****************************************
   * Add Classification/Inventory

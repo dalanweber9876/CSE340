@@ -15,13 +15,15 @@
       <a id="inventory-link" href="/inv/add-inventory">Add New Inventory</a>
     </div>
 
-    <h2>Manage Inventory</h2>
-    <p>select a classification from the list to see the items belonging to the classification</p>
+    <div class="manageInventory">
+      <h2>Manage Inventory</h2>
+      <p>Select a classification from the list to see the items belonging to the classification</p>
 
-    <%- classificationSelect %>
+      <%- classificationSelect %>
     
-    <table id="inventoryDisplay"></table>
-    <noscript>JavaScript must be enabled to use this page.</noscript>
+      <table id="inventoryDisplay"></table>
+      <noscript>JavaScript must be enabled to use this page.</noscript>
+    </div>
 
     <% } else {
       res.redirect('/')

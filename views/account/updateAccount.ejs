@@ -18,7 +18,7 @@
             <input type="text" name="account_lastname" id="accountLastname" required value="<%= account_lastname %>">
 
             <label for="accountEmail">Email</label>
-            <input type="email" name="account_email" required value="<%= account_email %>">
+            <input type="email" name="account_email" id="accountEmail" required value="<%= account_email %>">
 
             <input type="hidden" name="account_id"
         <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
@@ -31,11 +31,11 @@
     <div class="loginContainer">
         <form class="loginForm" action="/account/change-password/<%- locals.accountData.account_id %>" method="post">
             <label for="accountPassword">New Password</label>
-            <input type="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
 
             <p>*Entering a password here will change the current password*</p>
+            <p>The password must contain:</p>
             <ul>
-                <span>The password must contain:</span>
                 <li>a minimum of 12 characters</li>
                 <li>at least one capital letter</li>
                 <li>at least one number</li>
