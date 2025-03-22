@@ -214,6 +214,7 @@ validate.changePasswordRules = () => {
 * ***************************** */
 validate.checkNewPassword = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body
+  console.log(account_firstname + "\n" + account_lastname + "\n" + account_email)
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -222,9 +223,9 @@ validate.checkNewPassword = async (req, res, next) => {
       errors,
       title: "Edit Account",
       nav,
-      account_firstname,
-      account_lastname,
-      account_email,
+      account_firstname: res.locals.accountData.account_firstname,
+      account_lastname: res.locals.accountData.account_lastname,
+      account_email: res.locals.accountData.account_email,
     })
     return
   }
