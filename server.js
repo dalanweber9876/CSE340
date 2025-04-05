@@ -17,8 +17,12 @@ const errorController = require("./controllers/errorController");
 const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute");
+const messageRoute = require("./routes/messageRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'))
 
 /* ***********************
  * Middleware
@@ -67,6 +71,9 @@ app.use("/inv", inventoryRoute)
 
 // Account routes
 app.use("/account", accountRoute)
+
+// Message routes
+app.use("/inbox", messageRoute)
 
 // Error link route
 app.use("/produce-error", utilities.handleErrors(errorController.produceError))

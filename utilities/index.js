@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const messageModel = require("../models/message-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -182,5 +183,54 @@ Util.checkJWTToken = (req, res, next) => {
       return res.redirect("/account/login")
     }
    }
+
+/* **************************************
+* Build the message table
+* ************************************ */
+Util.buildMessagesTable = async function(data){
+  console.log(`Data: ${data}`)
+  let messages = "";
+  if(data.length > 0){
+    messages = '<table>'
+    messages += '<thead>'
+    messages += '<tr>'
+    messages += '<th>Received</th>'
+    messages += '<th>Subject</th>'
+    messages += '<th>From</th>'
+    messages += '<th>Read</th>'
+    messages += '</tr>'
+    messages += '</thead>'
+    messages += '<tbody>'
+    data.forEach(message => { 
+      messages += '<tr>'
+      messages += `<td>${message.message_created}</td>`
+      messages += `<td><a href="inbox/view/${message.message_id}">${message.message_subject}</a></td>`
+      messages += `<td>${message.message_from}</td>`
+      messages += `<td>${message.message_read}</td>`
+      messages += '</tr>'
+    })
+    messages += '</tbody>'
+    messages += '</table>'
+  } else { 
+    messages = '<p class="notice">Sorry, you don\'t have any messages</p>'
+  }
+  return messages
+}
+
+/* **************************************
+* Build the message list display
+* ************************************ */
+Util.buildMessageList = async function () {
+  let data = await messageModel.getContacts();
+  let contactsList =
+    '<select name="message_to" id="message_to" required>'
+  contactsList += "<option value=''>Choose a Recipient</option>"
+  data.rows.forEach((row) => {
+    contactsList += '<option value="' + row.account_id + '"'
+    contactsList += ">" + row.account_firstname + ' ' + row.account_lastname + "</option>"
+  })
+  contactsList += "</select>"
+  return contactsList
+}
 
 module.exports = Util
