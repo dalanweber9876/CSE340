@@ -1,0 +1,35 @@
+<% if (title) { %>
+    <h1 class="management-title"><%= title %></h1>
+    <p class="management-messages"><%- messages() %></p>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+    <form id="replyForm" class="management-forms" action="/inbox/reply-message" method="post">
+        <!-- Show user name, but don't submit it -->
+        <label for="message_to">To:</label>
+        <input type="text" id="reply_to" required readonly value="<%= name %>">
+
+        <!-- Hidden input that actually submits the account ID -->
+        <input type="hidden" name="reply_to" value="<%= message.message_from %>">
+
+        <label for="message_subject">Subject:</label>
+        <input type="text" name="reply_subject" id="reply_subject" required readonly value="<%= message.message_subject.startsWith('RE: ') ? message.message_subject : 'RE: ' + message.message_subject %>">
+
+        <label for="message_body">Message:</label>
+        <input type="text" name="reply_body" id="reply_body" required value="<%= locals.message_body %>">
+
+        <button type="submit">Send</button>
+        
+        <input type="hidden" name="account_id"
+        <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
+        <% } %>>
+    </form>
+
+<% } else {
+    res.redirect('/')
+  } %>

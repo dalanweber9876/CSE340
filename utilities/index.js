@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const messageModel = require("../models/message-model")
+const accountModel = require("../models/account-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -188,7 +189,6 @@ Util.checkJWTToken = (req, res, next) => {
 * Build the message table
 * ************************************ */
 Util.buildMessagesTable = async function(data){
-  console.log(`Data: ${data}`)
   let messages = "";
   if(data.length > 0){
     messages = '<table>'
@@ -204,8 +204,8 @@ Util.buildMessagesTable = async function(data){
     data.forEach(message => { 
       messages += '<tr>'
       messages += `<td>${message.message_created}</td>`
-      messages += `<td><a href="inbox/view/${message.message_id}">${message.message_subject}</a></td>`
-      messages += `<td>${message.message_from}</td>`
+      messages += `<td><a href="/inbox/view/${message.message_id}">${message.message_subject}</a></td>`
+      messages += `<td>${message.account_firstname} ${message.account_lastname}</td>`
       messages += `<td>${message.message_read}</td>`
       messages += '</tr>'
     })

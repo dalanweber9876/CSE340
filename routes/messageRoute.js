@@ -16,6 +16,9 @@ router.put("/mark-read/:message_id", utilities.handleErrors(messageController.to
 // Archive
 router.put("/archive/:message_id", utilities.handleErrors(messageController.toggleArchived));
 
+// Delete
+router.delete("/delete/:message_id", utilities.handleErrors(messageController.deleteMessage));
+
 // New Message
 router.get ("/new-message", utilities.handleErrors(messageController.buildNewMessage));
 router.post("/new-message", 
@@ -23,6 +26,14 @@ router.post("/new-message",
     messageValidate.messageRules(), 
     messageValidate.checkMessageData,
     utilities.handleErrors(messageController.sendNewMessage))
+
+// Reply
+router.get("/reply/:message_id", utilities.handleErrors(messageController.buildReply));
+router.post("/reply-message", 
+    utilities.checkLogin,
+    messageValidate.replyRules(), 
+    messageValidate.checkReplyData,
+    utilities.handleErrors(messageController.sendReply));
 
 // Archive
 router.get("/archives", utilities.handleErrors(messageController.buildViewArchive));

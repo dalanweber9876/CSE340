@@ -1,4 +1,5 @@
 const messageModel = require("../models/message-model")
+const accountModel = require("../models/account-model")
 const utilities = require("../utilities/")
 
 /* ****************************************
@@ -6,18 +7,19 @@ const utilities = require("../utilities/")
 * *************************************** */
 async function buildInbox(req, res, next) {
     let nav = await utilities.getNav()
-    // Retrieve messages and pass them into buildMessagesTable()
     let data = await messageModel.getMessagesByAccountId(res.locals.accountData.account_id)
     let messageTable = await utilities.buildMessagesTable(data);
     const account_firstname = res.locals.accountData.account_firstname;
     const account_lastname = res.locals.accountData.account_lastname;
     const name = account_firstname + " " + account_lastname;
+    const numArchived = await messageModel.getNumArchived(res.locals.accountData.account_id)
     res.render("message/inbox", {
       title: name + "'s Inbox",
       nav,
       errors: null,
       name: name,
       messageTable: messageTable,
+      numArchived,
     })
 }
 
@@ -40,10 +42,13 @@ async function buildNewMessage(req, res, next) {
 * *************************************** */
 async function buildViewArchive(req, res, next) {
     let nav = await utilities.getNav()
+    let data = await messageModel.getArchivedByAccountId(res.locals.accountData.account_id)
+    let messageTable = await utilities.buildMessagesTable(data);
     res.render("message/archives", {
       title: "Archives",
       nav,
       errors: null,
+      messageTable,
     })
 }
 
@@ -143,4 +148,82 @@ async function toggleArchived(req, res, next) {
   }
 }
 
-module.exports = { buildInbox, buildNewMessage, buildViewArchive, sendNewMessage, buildSingleMessage, toggleRead, toggleArchived }
+/* ****************************************
+*  Delete Message
+* *************************************** */
+async function deleteMessage(req, res, next) {
+  let message_id = parseInt(req.params.message_id);
+
+  const deleteResult = await messageModel.deleteMessage(
+    message_id
+  )
+  let nav = await utilities.getNav()
+
+  if (deleteResult) {
+    req.flash(
+      "notice",
+      `Congratulations, the message was deleted!`
+    )
+    return res.redirect('/inbox')
+  } else {
+    req.flash("notice", "Sorry, the message could not be deleted. Please try again!")
+    res.render("./message/singleMessage", {
+      title: "Send New Message",
+      nav,
+      errors: req.validationErrors(),
+      locals: req.body,
+      message_id,
+    });
+  }
+}
+
+/* ****************************************
+*  Deliver reply view
+* *************************************** */
+async function buildReply(req, res, next) {
+  let nav = await utilities.getNav()
+  let message = await messageModel.getSingleMessage(req.params.message_id)
+  let contactSelection = await utilities.buildMessageList();
+  let account = await accountModel.getAccountById(message.message_from)
+  let name = `${account.account_firstname} ${account.account_lastname}`
+  res.render("message/reply", {
+    title: "Reply",
+    nav,
+    errors: null,
+    contactSelection,
+    message,
+    name,
+
+  })
+}
+
+/* ****************************************
+*  Send a reply
+* *************************************** */
+async function sendReply(req, res, next) {
+  const { reply_to, reply_subject, reply_body, account_id } = req.body
+
+  const addResult = await messageModel.addNewMessage(
+    reply_to, reply_subject, reply_body, account_id
+  )
+  let nav = await utilities.getNav()
+
+  if (addResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you sent a new message!`
+    )
+    return res.redirect('/inbox')
+  } else {
+    req.flash("notice", "Sorry, the new message was not sent. Please try again!")
+    res.render("./message/newMessage", {
+      title: "Send New Message",
+      nav,
+      errors: req.validationErrors(),
+      locals: req.body,
+    });
+  }
+}
+
+
+module.exports = { buildInbox, buildNewMessage, buildViewArchive, sendNewMessage, buildSingleMessage, toggleRead, toggleArchived, deleteMessage, buildReply, sendReply }
