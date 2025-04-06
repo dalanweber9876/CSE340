@@ -412,6 +412,19 @@ main h1, main h2 {
   color: black;
 }
 
+.management-body ul {
+  padding-left: 0px;
+}
+
+.management-body li {
+  list-style-type: none;
+  padding: 0px;
+}
+
+#message-header {
+  margin-top: 40px;
+}
+
 .loginForm .submit-button {
   font-size: 13px;
   height: 35px;
@@ -421,6 +434,84 @@ main h1, main h2 {
 #messages {
   grid-column: 1/2;
   grid-row: 1/2;
+}
+
+/*****************************************
+ * Messaging
+******************************************/
+.messageTable {
+  width: 90%;
+  margin: auto;
+  border-collapse: collapse; 
+}
+
+.messageTable th {
+  text-align: left;
+}
+
+.messageTable th, .messageTable td {
+  padding: 10px;
+}
+
+.messageTable tr:nth-of-type(even) {
+  background-color: #f0f0f0;
+}
+
+#newMessageForm, #replyForm {
+  max-width: 400px;
+  width: 90%;
+  margin: auto;
+}
+
+#newMessageForm a {
+  margin: 20px auto 0px auto;
+}
+
+.single-message-title {
+  margin-right: auto;
+  margin-left: 20px;
+}
+
+.single-message-body li{
+  list-style-type: none;
+  display: flex;
+}
+
+.single-message-body li p{
+  margin: 5px 2px;
+}
+
+.single-message-body li p:first-of-type{
+  font-weight: bold;
+}
+
+.single-message-body li:last-of-type{
+  flex-direction: column;
+}
+
+.single-message-body li:last-of-type p {
+  flex-direction: column;
+  margin: 0px;
+}
+
+.single-message-body hr {
+  width: 95%;
+  height: 2px;
+  background-color: black;
+  margin-bottom: 30px;
+}
+
+.single-message-buttons {
+  margin-left: 10px;
+}
+
+.single-message-buttons form{
+  margin: 10px;
+}
+
+#replyForm a, #newMessageForm a, #replyForm a:visited, #newMessageForm a:visited {
+  color: black;
+  margin: 30px auto 0px auto;
 }
 
 
@@ -701,4 +792,31 @@ main h1, main h2 {
     font-size: 18px;
   }
 
+  /*****************************************
+  * Account Management
+  ******************************************/
+  .single-message-body {
+    grid-column: 1/5;
+  }
+
+  .single-message-body p {
+    font-size: 24px;
+  }
+
+  .single-message-title {
+    grid-column: 1/5;
+  }
+
+  .messageTable {
+    grid-column: 2/4;
+  }
+
+  .inbox-links {
+    padding: 10px;
+  }
+
+  .inbox-links li {
+    list-style-type: none;
+  }
+  
 }

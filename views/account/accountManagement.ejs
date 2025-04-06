@@ -12,6 +12,7 @@
     <h2>Welcome <%- locals.accountData.account_firstname %>!</h2>
 
     <div class="management-body">
+      <div class="management-body-account">
       <p>You're logged in!</p>
       <p><a href="/account/edit/<%- locals.accountData.account_id %>">Edit Account Information</a></p>
       <% if(locals.accountData.account_type != 'Client') { %>
@@ -21,12 +22,15 @@
       <% } else {
         res.redirect('/')
       } %>
+      </div>
 
-      <h2>Message Center</h2>
+      <div class="management-body-messages">
+      <h2 id="message-header">Message Center</h2>
       <ul>
         <li>You have <%= numUnread %> unread messages</li>
         <li>Go to <a href="/inbox">inbox</a></li>
       </ul>
+    </div>
     </div>
 
     

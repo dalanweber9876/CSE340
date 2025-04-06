@@ -191,7 +191,7 @@ Util.checkJWTToken = (req, res, next) => {
 Util.buildMessagesTable = async function(data){
   let messages = "";
   if(data.length > 0){
-    messages = '<table>'
+    messages = '<table class="messageTable">'
     messages += '<thead>'
     messages += '<tr>'
     messages += '<th>Received</th>'
@@ -202,8 +202,21 @@ Util.buildMessagesTable = async function(data){
     messages += '</thead>'
     messages += '<tbody>'
     data.forEach(message => { 
+
+    const message_created = message.message_created;
+    const date = new Date(message_created);
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    }).format(date);
+
       messages += '<tr>'
-      messages += `<td>${message.message_created}</td>`
+      messages += `<td>${formattedDate}</td>`
       messages += `<td><a href="/inbox/view/${message.message_id}">${message.message_subject}</a></td>`
       messages += `<td>${message.account_firstname} ${message.account_lastname}</td>`
       messages += `<td>${message.message_read}</td>`

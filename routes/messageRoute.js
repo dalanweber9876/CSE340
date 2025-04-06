@@ -5,22 +5,22 @@ const utilities = require('../utilities')
 const messageValidate = require('../utilities/message-validation')
 
 // Inbox
-router.get("/", utilities.handleErrors(messageController.buildInbox));
+router.get("/", utilities.checkLogin, utilities.handleErrors(messageController.buildInbox));
 
 // Single Message View
-router.get("/view/:message_id", utilities.handleErrors(messageController.buildSingleMessage));
+router.get("/view/:message_id", utilities.checkLogin, utilities.handleErrors(messageController.buildSingleMessage));
 
 // Mark as Read
-router.put("/mark-read/:message_id", utilities.handleErrors(messageController.toggleRead));
+router.put("/mark-read/:message_id", utilities.checkLogin, utilities.handleErrors(messageController.toggleRead));
 
 // Archive
-router.put("/archive/:message_id", utilities.handleErrors(messageController.toggleArchived));
+router.put("/archive/:message_id", utilities.checkLogin, utilities.handleErrors(messageController.toggleArchived));
 
 // Delete
-router.delete("/delete/:message_id", utilities.handleErrors(messageController.deleteMessage));
+router.delete("/delete/:message_id", utilities.checkLogin, utilities.handleErrors(messageController.deleteMessage));
 
 // New Message
-router.get ("/new-message", utilities.handleErrors(messageController.buildNewMessage));
+router.get ("/new-message", utilities.checkLogin, utilities.handleErrors(messageController.buildNewMessage));
 router.post("/new-message", 
     utilities.checkLogin,
     messageValidate.messageRules(), 
@@ -28,7 +28,7 @@ router.post("/new-message",
     utilities.handleErrors(messageController.sendNewMessage))
 
 // Reply
-router.get("/reply/:message_id", utilities.handleErrors(messageController.buildReply));
+router.get("/reply/:message_id", utilities.checkLogin, utilities.handleErrors(messageController.buildReply));
 router.post("/reply-message", 
     utilities.checkLogin,
     messageValidate.replyRules(), 
@@ -36,6 +36,6 @@ router.post("/reply-message",
     utilities.handleErrors(messageController.sendReply));
 
 // Archive
-router.get("/archives", utilities.handleErrors(messageController.buildViewArchive));
+router.get("/archives", utilities.checkLogin, utilities.handleErrors(messageController.buildViewArchive));
 
 module.exports = router;

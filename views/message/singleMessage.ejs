@@ -1,5 +1,5 @@
 <% if (title) { %>
-    <h1 class="management-title"><%= title %></h1>
+    <h1 class="single-message-title"><%= title %></h1>
     <p class="management-messages"><%- messages() %></p>
     <% if (errors) { %>
         <ul class="notice">
@@ -10,38 +10,43 @@
 
       <% } %>
 
-      <ul>
-        <li>
-            <p>Subject: </p> 
-            <p><%- message.message_subject %></p>
-        </li>
-        <li>
-            <p>From: </p> 
-            <p><%- message.account_firstname %> <%- message.account_lastname %></p>
-        </li>
-        <li>
-            <p>Message: </p> 
-            <p><%- message.message_body %></p>
-        </li>
-       </ul>
+    <div class="single-message-body">
+        <ul>
+            <li>
+                <p>Subject: </p> 
+                <p><%- message.message_subject %></p>
+            </li>
+            <li>
+                <p>From: </p> 
+                <p><%- message.account_firstname %> <%- message.account_lastname %></p>
+            </li>
+            <li>
+                <p>Message: </p> 
+                <p><%- message.message_body %></p>
+            </li>
+        </ul>
 
-       <hr>
+        <hr>
+        <div class="single-message-buttons">
+            <a href="/inbox">Return to inbox</a>
 
-        <a href="/inbox">Return to inbox</a>
-        <a href="/inbox/reply/<%- message.message_id %>">
-            <button>Reply</button>
-        </a>
-        <form action="/inbox/mark-read/<%- message.message_id %>?_method=PUT" method="POST">
-            <button type="submit">Mark as Read</button>
-        </form>
-        
-        <form action="/inbox/archive/<%- message.message_id %>?_method=PUT" method="POST">
-            <button type="submit">Archive Message</button>
-        </form>
-        
-        <form action="/inbox/delete/<%- message.message_id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete Message</button>
-        </form>
+            <form action="/inbox/reply/<%- message.message_id %>" method="GET">
+                <button type="submit">Reply</button>
+            </form>
+
+            <form action="/inbox/mark-read/<%- message.message_id %>?_method=PUT" method="POST">
+                <button type="submit">Mark as Read</button>
+            </form>
+            
+            <form action="/inbox/archive/<%- message.message_id %>?_method=PUT" method="POST">
+                <button type="submit">Archive Message</button>
+            </form>
+            
+            <form action="/inbox/delete/<%- message.message_id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete Message</button>
+            </form>
+        </div>
+    </div>
 
 <% } else {
     res.redirect('/')

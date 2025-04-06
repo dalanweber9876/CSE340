@@ -24,6 +24,8 @@
         <input type="text" name="reply_body" id="reply_body" required value="<%= locals.message_body %>">
 
         <button type="submit">Send</button>
+
+        <a href="/inbox">Return to inbox</a>
         
         <input type="hidden" name="account_id"
         <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
